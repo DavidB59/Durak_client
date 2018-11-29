@@ -2,19 +2,39 @@
   height: 50px;
   width: 50px;
 }
-
-.visibleCard {
-  height: 200px;
-  width: 140;
+.boarddiv {
+  position: relative;
 }
 
+.visibleCard {
+  height: 150px;
+  width: 90;
+}
+.divCard{
+  position : absolute;
+  top : 150 px;
+  float : left;
+  height: 150px;
+  width: 90;
+}
 
 .opponentCard {
-  height: 200px;
-  width: 140;
+  position : absolute;
+  top : 270 px;
+  float : left;
+  height: 150px;
+  width: 90;
 }
 
 .trumpCard {
-  height: 200px;
-  width: 140;
+  height: 150px;
+  width: 90;
 }
+
+.tapis {
+  height: 800px;
+  width: 800;
+}
+
+
+/* style={{"position" :"absolute", "top":"270px", "float":"left", "height":" 150px"}}  */
