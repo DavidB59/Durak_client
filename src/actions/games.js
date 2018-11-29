@@ -93,7 +93,7 @@ export const attack = (gameId, cardCode) =>  (dispatch, getState) => {
   .patch(`${baseUrl}/games/${gameId}/attack`)
   .set('Authorization', `Bearer ${jwt}`)
   .send({"cardCode": cardCode})
-  .then(_ => console.log('attack'))
+  .then(_ => dispatch(updateGameSuccess()))
   .catch(err => console.error(err))
 
 }

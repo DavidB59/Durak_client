@@ -56,14 +56,20 @@ export default function Board(props) {
       style={{ "position": "absolute", "top": "570px", "left": `240px`, "height": " 150px" }}
       src={props.deck[0].image} alt={props.deck[0].code} />
     }
- { !props.onTable ? 
+ { props.onTable.length<1 ? 
     console.log("No table")
   :
-<img
+  props.onTable.map( (card, vanyaRocks) =>
+  <img
+    onClick={() => props.onClick(card.code)}
+    style={{ "position": "absolute", "top": "570px", "left": `${vanyaRocks * 80 + 550}px`, "height": " 150px" }}
+    src={card.image} alt={card.code} />
+)}
+{/* <img
   style={{ "position": "absolute", "top": "570px", "left": `550px`, "height": " 150px" }}
-  src={props.onTable[0].image} alt={props.onTable[0].code} />
+  src={props.onTable[0].image} alt={props.onTable[0].code} /> */}
 
- }
+ 
 
 
   </div>)
