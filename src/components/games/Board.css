@@ -2,3 +2,19 @@
   height: 50px;
   width: 50px;
 }
+
+.visibleCard {
+  height: 200px;
+  width: 140;
+}
+
+
+.opponentCard {
+  height: 200px;
+  width: 140;
+}
+
+.trumpCard {
+  height: 200px;
+  width: 140;
+}

@@ -12,7 +12,12 @@ class GameDetails extends PureComponent {
 
   componentWillMount() {
     if (this.props.authenticated) {
+     // console.log(this.props.game.deckOfCards)
+    //  console.log('test')
+    //  console.log(this.props.game)
       if (this.props.game === null) this.props.getGames()
+      // console.log('test2')
+      // console.log(this.props.game)
       if (this.props.users === null) this.props.getUsers()
     }
   }
@@ -48,7 +53,8 @@ class GameDetails extends PureComponent {
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
-
+      console.log("test3")
+      console.log(this.props)
     return (<Paper className="outer-paper">
       <h1>Game #{game.id}</h1>
 
@@ -75,7 +81,7 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        <Board deck={game.deckOfCards} handPlayer1={game.players[0]} handPlayer2={game.players[1]} />
       }
     </Paper>)
   }

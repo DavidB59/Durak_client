@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import './LoginForm.css'
-
+import {backOfCard} from '../../constants'
 export default class LoginForm extends PureComponent {
 	state = {}
 
@@ -36,7 +36,7 @@ export default class LoginForm extends PureComponent {
           </label>
 
   				<button type="submit">Login</button>
-					 <img src="https://deckofcardsapi.com/static/img/7C.png" alt='an image' ></img>
+					 <img height="200px" width="140px" src={backOfCard} alt='an image' ></img>
   			</form>
 		  </div>)
 	}
