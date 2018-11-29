@@ -14,14 +14,11 @@
   position : absolute;
   top : 150 px;
   float : left;
-  height: 150px;
-  width: 90;
+
 }
 
 .opponentCard {
-  position : absolute;
-  top : 270 px;
-  float : left;
+
   height: 150px;
   width: 90;
 }

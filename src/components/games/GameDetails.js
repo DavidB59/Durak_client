@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
+import {getGames, joinGame, updateGame, attack} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
@@ -36,11 +36,17 @@ class GameDetails extends PureComponent {
     updateGame(game.id, board)
   }
 
+  onClick = (cardCode) => {
+  // preventDefault()
+  console.log('BLIN BLIN BLIN')
+  console.log(cardCode)
 
+   this.props.attack(this.props.match.params.id, cardCode)
+  }
 
   render() {
     const {game, users, authenticated, userId} = this.props
-
+    console.log(this.props)
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
@@ -53,8 +59,8 @@ class GameDetails extends PureComponent {
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
-      console.log("test3")
-      console.log(this.props)
+      // console.log("test3")
+      // console.log(this.props)
     return (<Paper className="outer-paper">
       <h1>Game #{game.id}</h1>
 
@@ -81,7 +87,11 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <Board deck={game.deckOfCards} handPlayer1={game.players[0]} handPlayer2={game.players[1]} />
+        <Board 
+        onTable={game.onTable}
+        currentUser={this.props.userId}
+        onClick={this.onClick}
+        deck={game.deckOfCards} player1={game.players[0]} player2={game.players[1]} />
       }
     </Paper>)
   }
@@ -95,7 +105,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame
+  getGames, getUsers, joinGame, updateGame,attack
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
