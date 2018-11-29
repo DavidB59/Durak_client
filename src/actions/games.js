@@ -83,3 +83,17 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
 }
 
 
+
+export const attack = (gameId, cardCode) =>  (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+  console.log('test21')
+  console.log(cardCode)
+  request
+  .patch(`${baseUrl}/games/${gameId}/attack`)
+  .set('Authorization', `Bearer ${jwt}`)
+  .send({"cardCode": cardCode})
+  .then(_ => dispatch(updateGameSuccess()))
+  .catch(err => console.error(err))
+
+}
