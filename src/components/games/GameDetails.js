@@ -1,15 +1,15 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame, attack} from '../../actions/games'
+import {getGames, joinGame, updateGame, attack, defend,cardsToDefend , takeCard} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
 
-class GameDetails extends PureComponent {
 
+class GameDetails extends PureComponent {
   componentWillMount() {
     if (this.props.authenticated) {
      // console.log(this.props.game.deckOfCards)
@@ -40,13 +40,17 @@ class GameDetails extends PureComponent {
   // preventDefault()
   console.log('BLIN BLIN BLIN')
   console.log(cardCode)
-
-   this.props.attack(this.props.match.params.id, cardCode)
+if (this.props.game.onTable.length<1){
+  this.props.attack(this.props.match.params.id, cardCode)
+  // this.props.cardsToDefend(this.props.match.params.id)
+}
+else if( this.props.game.onTable.length===1)
+this.props.defend(this.props.match.params.id, cardCode)
   }
 
   render() {
     const {game, users, authenticated, userId} = this.props
-    console.log(this.props)
+    // console.log(this.props)
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
@@ -55,7 +59,6 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
-
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
@@ -88,6 +91,8 @@ class GameDetails extends PureComponent {
       {
         game.status !== 'pending' &&
         <Board 
+        takeCard = {this.props.takeCard}
+        id ={this.props.match.params.id}
         onTable={game.onTable}
         currentUser={this.props.userId}
         onClick={this.onClick}
@@ -105,7 +110,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame,attack
+  getGames, getUsers, joinGame, updateGame,attack,defend ,cardsToDefend, takeCard
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)

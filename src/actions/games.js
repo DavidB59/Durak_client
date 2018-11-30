@@ -27,6 +27,14 @@ const joinGameSuccess = () => ({
   type: JOIN_GAME_SUCCESS
 })
 
+const toDefend = (cards) => ({
+  type: "TO_DEFEND",
+  paympad : cards
+})
+
+
+
+
 
 export const getGames = () => (dispatch, getState) => {
   const state = getState()
@@ -93,6 +101,62 @@ export const attack = (gameId, cardCode) =>  (dispatch, getState) => {
   .patch(`${baseUrl}/games/${gameId}/attack`)
   .set('Authorization', `Bearer ${jwt}`)
   .send({"cardCode": cardCode})
+  .then(_ => dispatch(updateGameSuccess()))
+  .then(cardsToDefend(gameId,jwt))
+  .then(_ => console.log('RATAA'))
+  .catch(err => console.error(err))
+
+}
+
+
+
+export const defend = (gameId, cardCode) =>  (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+  console.log('DEFEND')
+  console.log(cardCode)
+  request
+  .patch(`${baseUrl}/games/${gameId}/defend`)
+  .set('Authorization', `Bearer ${jwt}`)
+  .send({"cardCode": cardCode})
+  .then(_ => dispatch(updateGameSuccess()))
+  .then(takeCard(gameId,jwt))
+  .catch(err => console.error(err))
+}
+
+
+export const cardsToDefend = (gameId,jwt) =>  (dispatch) => {
+  // const state = getState()
+  // const jwt = state.currentUser.jwt
+  console.log('Cards to defend')
+  request
+  .get(`${baseUrl}/games/${gameId}/cards-to-defend`)
+  .set('Authorization', `Bearer ${jwt}`)
+  .then(response =>{ 
+    console.log(response)
+    console.log('we are almost there')
+    dispatch (toDefend(response.body))})
+  .then(_ => dispatch(updateGameSuccess()))
+  .catch(err => console.error(err))
+
+}
+
+
+
+
+export const takeCard =  (gameId,jwt) =>  (dispatch) => {
+  //  const state = getState()
+  //  const jwt = state.currentUser.jwt
+  console.log('taking Card')
+  request
+  .patch(`${baseUrl}/games/${gameId}/takeCards`)
+  .set('Authorization', `Bearer ${jwt}`)
+  // .then(response =>{ 
+  //   dispatch ({
+  //     type: "TO_DEFEND",
+  // payload: response.body
+  //   })
+  // }  )
   .then(_ => dispatch(updateGameSuccess()))
   .catch(err => console.error(err))
 

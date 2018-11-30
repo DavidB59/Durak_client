@@ -18,10 +18,8 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
 //     {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex,symbol,false))}
 //   </div>
 // )
-
 export default function Board(props) {
   return (<div>
-
     {<img style={{ "position": "relative", "height": " 800px" }} src={tapisCarte} alt={props.deck[0].code} />
     }
 
