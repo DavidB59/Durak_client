@@ -20,7 +20,7 @@ import { backOfCard, tapisCarte } from '../../constants'
 // )
 export default function Board(props) {
   return (<div>
-    {<img style={{ "position": "relative", "height": " 800px" }} src={tapisCarte} alt={props.deck[0].code} />
+    {<img style={{ "position": "relative", "height": " 800px" }} src={tapisCarte} alt="TapisCarte" />
     }
     {/* isEven(props.turn)===isEven(props.playerId) ? <p>This is your turn</p>
      : 
@@ -43,10 +43,12 @@ export default function Board(props) {
 
     {props.player2.userId === props.currentUser ? // if player 2 is current user; will display his cards,otherwise hidden cards
       props.player2.hand.map((card, vanyaRocks) =>
-        <img key={card.code} 
+          <img key={card.code} 
           onClick={() => props.onClick(card.code)}
           style={{ "position": "absolute", "top": "910px", "left": `${vanyaRocks * 80 + 450}px`, "height": " 150px" }}
           src={card.image} alt={card.code} />
+        
+     
       ) :
       props.player2.hand.map((card, vanyaRocks) =>
         <img key={card.code} 
@@ -54,7 +56,8 @@ export default function Board(props) {
           src={backOfCard} alt="backOfCard" />
     )}
 
-    {<img
+    {props.deck.length<1 ? console.log('deck empty') :
+    <img
       style={{ "position": "absolute", "top": "570px", "left": `240px`, "height": " 150px" }}
       src={props.deck[0].image} alt={props.deck[0].code} />
     }
