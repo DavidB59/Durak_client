@@ -37,12 +37,16 @@ class GameDetails extends PureComponent {
   }
 
   onClick = (cardCode) => {
-  // preventDefault()
-  console.log('BLIN BLIN BLIN')
-  console.log(cardCode)
+  // // preventDefault()
+  // console.log('BLIN BLIN BLIN')
+  // console.log(cardCode)
+// if (
+//   this.props.userId === this.props.game.players[0]) {  // CHANGE CONDITION TO MAKE IT CHECK this.props.game.turn
+//   return (
+//   console.log('working'),
+// alert('Wait for your turn'))}
 if (this.props.game.onTable.length<1){
   this.props.attack(this.props.match.params.id, cardCode)
-  // this.props.cardsToDefend(this.props.match.params.id)
 }
 else if( this.props.game.onTable.length===1)
 this.props.defend(this.props.match.params.id, cardCode)
