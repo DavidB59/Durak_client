@@ -28,6 +28,11 @@ export default (state = null, {type, payload}) => {
         return games
       }, {})
 
+      case "WINNER":
+      return {
+        payload
+      }
+
     default:
       return state
   }

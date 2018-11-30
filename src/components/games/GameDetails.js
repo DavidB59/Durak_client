@@ -37,16 +37,39 @@ class GameDetails extends PureComponent {
   }
 
   onClick = (cardCode) => {
-  // preventDefault()
-  console.log('BLIN BLIN BLIN')
-  console.log(cardCode)
-if (this.props.game.onTable.length<1){
-  this.props.attack(this.props.match.params.id, cardCode)
-  // this.props.cardsToDefend(this.props.match.params.id)
+  //ATTACKER TURN
+    if (this.props.game.onTable.length<1){
+      if (this.props.game.players[0].userId === this.props.userId) { // Check player 0 is current user
+        if (this.props.game.players[0].id %2 === this.props.game.turn)
+        { 
+          this.props.attack(this.props.match.params.id, cardCode)
+      
+      }
+        else { alert ('wait for your turn')}
+      }
+      // executed if player 1 is current User
+      else if (this.props.game.players[1].id %2 === this.props.game.turn)
+      { 
+        this.props.attack(this.props.match.params.id, cardCode)      }
+      else { alert ('wait for your turn')}
+    }
+    // DEFENDER TURN
+    else if( this.props.game.onTable.length===1){
+      if (this.props.game.players[0].userId === this.props.userId) {
+        if (this.props.game.players[0].id %2 === this.props.game.turn)
+        { 
+          this.props.defend(this.props.match.params.id, cardCode)
+                      }
+        else { alert ('wait for your turn')}
+      }
+      else if (this.props.game.players[1].id %2 === this.props.game.turn)
+      { 
+        this.props.defend(this.props.match.params.id, cardCode)
+      }
+      else { alert ('wait for your turn')}
+    }
+    
 }
-else if( this.props.game.onTable.length===1)
-this.props.defend(this.props.match.params.id, cardCode)
-  }
 
   render() {
     const {game, users, authenticated, userId} = this.props
@@ -91,6 +114,7 @@ this.props.defend(this.props.match.params.id, cardCode)
       {
         game.status !== 'pending' &&
         <Board 
+        users = {this.props.users}
         takeCard = {this.props.takeCard}
         id ={this.props.match.params.id}
         onTable={game.onTable}
