@@ -114,6 +114,7 @@ class GameDetails extends PureComponent {
       {
         game.status !== 'pending' &&
         <Board 
+        users = {this.props.users}
         takeCard = {this.props.takeCard}
         id ={this.props.match.params.id}
         onTable={game.onTable}

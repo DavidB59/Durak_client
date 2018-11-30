@@ -20,6 +20,28 @@ import { backOfCard, tapisCarte } from '../../constants'
 // )
 export default function Board(props) {
   return (<div>
+ 
+      { props.deck.length===0 &&
+      props.player1.hand.length ===0 &&
+      props.player1.userId === props.users[2].id &&
+    <h1>${props.users[0].firstName} WON THE GAME</h1> }
+
+
+    { props.deck.length===0 &&
+      props.player2.hand.length ===0 &&
+      props.player2.userId === props.users[2].id &&
+      <h1>${props.users[0].firstName} WON THE GAME</h1> }
+
+    { props.deck.length===0 &&
+      props.player1.hand.length ===0 &&
+      props.player1.userId === props.users[1].id &&
+      <h1>{props.users[1].firstName} WON THE GAME</h1> }
+
+    { props.deck.length===0 &&
+      props.player2.hand.length ===0 &&
+      props.player2.userId === props.users[1].id &&
+      <h1>{props.users[1].firstName} WON THE GAME</h1> }   
+
     {<img style={{ "position": "relative", "height": " 800px" }} src={tapisCarte} alt="TapisCarte" />
     }
     {/* isEven(props.turn)===isEven(props.playerId) ? <p>This is your turn</p>
