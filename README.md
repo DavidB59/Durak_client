@@ -1,5 +1,6 @@
-# Tic Tac Toe front end
+# Durak front-end
 
-This is the frontend for the game starter in which you can play Tic Tac Toe with a friend. It's build using the standard `create-react-app` so the usual `yarn start` can be used.
+Full stack team project using JavaScript, React and Redux for front end.
+Multiplayer game. Durak is a russian card game. This is Durak for two players. 
 
-The backend (server) of this project must be running for the app to function correctly.
+
